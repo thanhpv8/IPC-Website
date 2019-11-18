@@ -1,0 +1,271 @@
+<!-- Dropdown selections -->
+<div id="ref-select-div" class="col-md-9" style="padding:2px;">
+    <!-- Selection Boxes Dyanamically Created -->
+    <div class="row ref-select-row">
+		</div>
+		<!-- Action Row -->
+		<div class="row">
+			<div class="col-md-3">
+				<div class="form-group">
+					<label>ACTION</label>
+					<select id="reference-page-action" class="form-control">
+						<option value=""></option>
+						<option value="update">UPDATE</option>
+						<option value="reset">RESET</option>
+					</select>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<!-- Submit Button -->
+				<button id="reference-page-submit" type="button" class="btn btn-primary" style="margin-top:25px;">
+					Submit
+				</button>
+				<!-- Refresh Button -->
+				<button id="reference-page-refresh" type="button" class="btn btn-primary" style="margin-top:25px;">
+					Refresh
+				</button>
+			</div>
+		</div>
+
+
+</div>
+
+<script type="text/javascript" src="./pages/references/reference-page-options.js"></script>
+
+<script type="text/javascript">
+
+function pwreuseChange(pwreuse) {
+	if (pwreuse == "0") {
+		$("#reference-page-pwrepeat option:contains('N/A')").prop('disabled', false);
+		$("#reference-page-pwrepeat").val("0");
+		$("#reference-page-pwrepeat option:selected").siblings().prop('disabled', true);
+	} else {
+		$("#reference-page-pwrepeat option:selected").siblings().prop('disabled', false);
+		$("#reference-page-pwrepeat option:contains('N/A')").prop('disabled', true);
+		$("#reference-page-pwrepeat").val("240");
+	}
+}
+
+function pwrepeatChange(pwrepeat) {
+	if (pwrepeat == "0") {
+		$("#reference-page-pwreuse").val("0");
+	} else {
+		return;
+	}
+}
+
+function refStartup() {
+
+	if ($('.ref-select-box').length === 0) {		
+		let refSelect = createRefSelect(refOptions);
+		$('.ref-select-row').append(refSelect);
+	}
+	queryReferences();
+
+	$("#reference-page-pwreuse").on("change", function() {
+		if ($(this).val() == "0") {
+			$("#reference-page-pwrepeat option:contains('N/A')").prop('disabled', false);
+			$("#reference-page-pwrepeat").val("0");
+			$("#reference-page-pwrepeat option:selected").siblings().prop('disabled', true);
+		} else {
+			$("#reference-page-pwrepeat option:selected").siblings().prop('disabled', false);
+			$("#reference-page-pwrepeat option:contains('N/A')").prop('disabled', true);
+			$("#reference-page-pwrepeat").val("240");
+		}
+	});
+
+	$("#reference-page-pwrepeat").on("change", function() {
+		if ($(this).val() == "0") {
+			$("#reference-page-pwreuse").val("0").change();
+		} else {
+			return;
+		}
+	});
+
+}
+
+
+function createRefSelect(data) {
+	// let refSelect = '<div class="col-md-3">' +
+	// 									'<div class="form-group">' +
+	// 										'<label>'+data.title+'</label>' +
+	// 										'<select id="'+data.selectId+'" class="form-control ref-select-box" ref_id="'+data.ref_id+'">';
+	// for (let i=0; i<data.options.length; i++) {
+	// 	refSelect += '<option value="'+data.options[i].value+'">'+data.options[i].text+'</option>';
+	// }
+	// refSelect +=				'</select>' +
+	// 									'</div>' +
+	// 								'</div>';
+	let refElements="";
+	let n = refOptions.length;
+	let maxElementPerColumn = 7
+	let columns = Math.ceil(n/maxElementPerColumn);
+	
+	for(let i=0; i<columns; i++) {
+		let col = '<div class="col-md-3">' ;
+		for(let j=0; j<maxElementPerColumn; j++) {
+			let elementId = i*maxElementPerColumn + j;
+			if(elementId >= n) {
+				break;
+			}
+			let elementData = refOptions[elementId];
+			let element = '<div class="form-group">' +
+											'<label>'+elementData.title+'</label>' +
+											'<select id="'+elementData.selectId+'" class="form-control ref-select-box" ref_id="'+elementData.ref_id+'">';
+			for (let i=0; i<elementData.options.length; i++) {
+				element += '<option value="'+elementData.options[i].value+'">'+elementData.options[i].text+'</option>';
+			}
+			element +=				'</select>' +
+			'</div>';
+			col +=element;
+		}
+		col += '</div>';
+		refElements += col;
+	}
+
+
+
+	return refElements;
+}
+
+function queryReferences() {
+	$.ajax({
+		type: 'POST',
+		url: ipcDispatch,
+		data: {
+			"api":      "ipcRef",
+			"action":   "query",
+			"user":     user.uname,
+		},
+		dataType: 'json'
+	}).done(function(data) {
+		if (data.rslt == 'fail') {
+			clearErrors();
+			inputError($("#reference-page-action"),data.reason);
+		}
+		else {
+			let res = [];
+			if (data.hasOwnProperty('rows')) {
+				res = data.rows;
+			}
+			if (res.length == 0) {
+				inputError($('#reference-page-action'),'No Record Found');
+			}
+			displayRefs(res);
+		}
+	});
+}
+
+function displayRefs(data) {
+
+	$('.ref-select-box').each(function() {
+		let refId = $(this).attr('ref_id');
+
+		$(this).val(data[refId]);
+	});
+
+	pwreuseChange($("#reference-page-pwreuse").val());
+	pwrepeatChange($("#reference-page-pwrepeat").val());
+	
+
+}
+
+$(document).ready(function() {
+
+	var refFirstLoad = true;
+	// Click event for sidebar, loads page first time
+	$('.menu-item[page_id="references-page"]').click(function() {
+		refStartup();
+		clearErrors();
+		$("#reference-page-action").val("").change();
+		
+	});
+
+	// Change any option to clear the red/green text
+	$('.ref-select-row').on('change', function() {
+		clearErrors();
+		$("#reference-page-action").val("").change();
+	});
+
+	// Click event for submit button
+	$('#reference-page-submit').click(function() {
+		clearErrors();
+
+		let refObj = {};
+
+		$('.ref-select-box').each(function() {
+			let refId = $(this).attr('ref_id');
+
+			refObj[refId] = $(this).val();
+		});
+
+		let action = $('#reference-page-action').val();
+
+		if (action == "") {
+			inputError($('#reference-page-action'),'Select an action.');
+			return;
+		}
+		
+		$.ajax({
+			type: "POST",
+			url: ipcDispatch,
+			data: {
+				"api":      			"ipcRef",
+				"action":   			action,
+				"user":     			user.uname,
+				"alm_archv": 			refObj.alm_archv,
+				"alm_del": 				refObj.alm_del,
+				"auto_ckid": 			refObj.auto_ckid,
+				"auto_ordno": 		refObj.auto_ordno,
+				"brdcst_del": 		refObj.brdcst_del,
+				"cfg_archv": 			refObj.cfg_archv,
+				"cfg_del": 				refObj.cfg_del,
+				"date_format": 		refObj.date_format,
+				"maint_archv": 		refObj.maint_archv,
+				"maint_del": 			refObj.maint_del,
+				"mtc_restore": 		refObj.mtc_restore,
+				"prov_archv": 		refObj.prov_archv,
+				"prov_del": 			refObj.prov_del,
+				"pw_alert": 			refObj.pw_alert,
+				"pw_expire": 			refObj.pw_expire,
+				"pw_repeat": 			refObj.pw_repeat,
+				"pw_reuse": 			refObj.pw_reuse,
+				"temp_max": 			refObj.temp_max,
+				"user_disable": 	refObj.user_disable,
+				"user_idle_to": 	refObj.user_idle_to,
+				"volt_range": 		refObj.volt_range,
+				"temp_format": 		refObj.temp_format
+			},
+			dataType: 'json'
+		}).done(function(data) {
+			let res = data.rows;
+
+			if (data.rslt === 'fail') {
+				inputError($('#reference-page-action'), data.rslt + ' - ' + data.reason);
+			} else {
+				inputSuccess($('#reference-page-action'), data.rslt + ' - ' + data.reason);
+			}
+		});
+
+  });
+
+	// Click event for refresh button
+	$('#reference-page-refresh').click(function(e) {
+		e.preventDefault();
+
+		queryReferences();
+
+		$('#reference-page-action').val('');
+		clearErrors();
+	});
+
+	// Click event for action selection
+	$('#reference-page-action').change(function() {
+		clearErrors();
+	});
+
+
+
+});
+</script>
+

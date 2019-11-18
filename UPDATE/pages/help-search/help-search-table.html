@@ -1,0 +1,87 @@
+<!--Table-->
+<div class="col-md-7">
+  <div class="box box-primary">
+    <div class="box-header with-border">
+      <h3 class="box-title">LIST OF ITEMS:</h3>
+    </div>
+    <div style="padding:10px;">
+      <table id="helpsearch-table" class="table table-striped table-bordered table-hover" style="width:100%;">
+        <thead>
+          <tr>
+            <th>ITEM</th>
+            <th>DESCRIPTION</th>
+          </tr>
+        </thead>        
+      </table>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  var helpSearchDatatable = $('#helpsearch-table').DataTable({
+    dom: "frtip",
+    "data": [],
+    "pageLength": 5,
+    "columns": [
+      {"data":"item"},
+      {"data":"descr"},
+    ]
+  });
+
+  function queryHelpsearch() {
+    $.ajax({
+      type:'POST',
+      url: ipcDispatch,
+      data: {
+        "api": "ipcSearch",
+        "act": "search",
+        "user": user.uname,
+        "item": $('#helpsearch-form-item').val().toUpperCase()
+      },
+      dataType: 'json'
+
+    }).done(function(data) {
+      let res = data.rows;
+      if (data.rslt == 'fail') {
+        clearErrors();
+        inputError($('#help-form-action'), data.reason);
+      }
+      else {
+        helpSearchDatatable.clear().draw();
+        helpSearchDatatable.rows.add(res);
+        helpSearchDatatable.columns.adjust().draw();
+        helpSearchDatatable.search('').draw();
+      }
+    });
+  }
+
+  var helpSearchTableId = "";
+
+  $(document).ready(function() {
+
+    $('#view-helpsearch').click(function() {
+      queryHelpsearch();
+      clearErrors();
+    });
+
+    $(document).on('click', '#helpsearch-table tbody tr', function() {
+      let data = helpSearchDatatable.row(this).data();
+
+      if (data == undefined) {
+        return;
+      }
+      
+      helpSearchTableId = data.item;
+
+      $('#helpsearch-form-item').val(data.item);
+      $('#helpsearch-form-descr').val(data.descr);
+
+      // give selected class
+      $('#helpsearch-table tbody tr').removeClass('bg-primary');
+      $(this).addClass('bg-primary');
+
+      clearErrors();
+      $('#help-form-action').val('');
+    });
+  });
+</script>

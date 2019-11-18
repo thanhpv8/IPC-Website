@@ -1,0 +1,310 @@
+
+--------------------------------
+
+2019-07-11 12:43:26
+begin connect Same Node Same Section() 
+X port = 0.X.0.27
+Y port = 0.Y.1.9
+	X->d => s1->a: 0.1A.5.2
+
+2) locate s7:
+	Y->d => s7->a:0.7A.11.4
+List of possible s6's and s5's:
+
+0.6A.12.1
+	0.5A.20.1	0.5A.21.1	0.5A.22.1	0.5A.23.1	0.5A.24.1	0.5A.25.1	0.5A.26.1	0.5A.27.1	0.5A.28.1	0.5A.29.1
+0.6A.13.1
+	0.5A.30.1	0.5A.31.1	0.5A.32.1	0.5A.33.1	0.5A.34.1	0.5A.35.1	0.5A.36.1	0.5A.37.1	0.5A.38.1	0.5A.39.1
+0.6A.14.1
+	0.5A.40.1	0.5A.41.1	0.5A.42.1	0.5A.43.1	0.5A.44.1	0.5A.45.1	0.5A.46.1	0.5A.47.1	0.5A.48.1	0.5A.49.1
+0.6A.15.1
+	0.5A.50.1	0.5A.51.1	0.5A.52.1	0.5A.53.1	0.5A.54.1	0.5A.55.1	0.5A.56.1	0.5A.57.1	0.5A.58.1	0.5A.59.1
+0.6A.16.1
+	0.5A.60.1	0.5A.61.1	0.5A.62.1	0.5A.63.1	0.5A.64.1	0.5A.65.1	0.5A.66.1	0.5A.67.1	0.5A.68.1	0.5A.69.1
+0.6A.17.1
+	0.5A.70.1	0.5A.71.1	0.5A.72.1	0.5A.73.1	0.5A.74.1	0.5A.75.1	0.5A.76.1	0.5A.77.1	0.5A.78.1	0.5A.79.1
+0.6A.18.1
+	0.5A.80.1	0.5A.81.1	0.5A.82.1	0.5A.83.1	0.5A.84.1	0.5A.85.1	0.5A.86.1	0.5A.87.1	0.5A.88.1	0.5A.89.1
+0.6A.19.1
+	0.5A.90.1	0.5A.91.1	0.5A.92.1	0.5A.93.1	0.5A.94.1	0.5A.95.1	0.5A.96.1	0.5A.97.1	0.5A.98.1	0.5A.99.1
+	s1: 0.1A.5, getYx(2)=-1 , getXy(0)=-1
+	==> s2: 0.2A.0.5
+	s2: 0.2A.0, getYx(5)=-1 , getXy(0)=0
+	s2: 0.2A.0, getYx(5)=-1 , getXy(1)=-1
+		==> s3f: 0.3A.1.0
+	s3f: 0.3A.1, getYx(0)=-1 , getXy(0)=-1
+
+		==> s5: 0.5A.1.0
+0.6A.0
+0.6A.10
+0.6A.20
+0.6A.30
+0.6A.40
+ has no avail output, continue next k2 - 0.1A.5:2.0 - 0.2A.0:5.1 - 0.3A.1:0.0
+
+
+	s2: 0.2A.0, getYx(5)=-1 , getXy(2)=-1
+		==> s3f: 0.3A.2.0
+	s3f: 0.3A.2, getYx(0)=-1 , getXy(0)=-1
+
+		==> s5: 0.5A.2.0
+0.6A.0
+0.6A.10
+0.6A.20
+0.6A.30
+0.6A.40
+ has no avail output, continue next k2 - 0.1A.5:2.0 - 0.2A.0:5.2 - 0.3A.2:0.0
+
+
+	s2: 0.2A.0, getYx(5)=-1 , getXy(3)=-1
+		==> s3f: 0.3A.3.0
+	s3f: 0.3A.3, getYx(0)=-1 , getXy(0)=-1
+
+		==> s5: 0.5A.3.0
+0.6A.0
+0.6A.10
+0.6A.20
+0.6A.30
+0.6A.40
+ has no avail output, continue next k2 - 0.1A.5:2.0 - 0.2A.0:5.3 - 0.3A.3:0.0
+
+
+	s2: 0.2A.0, getYx(5)=-1 , getXy(4)=-1
+		==> s3f: 0.3A.4.0
+	s3f: 0.3A.4, getYx(0)=-1 , getXy(0)=-1
+
+		==> s5: 0.5A.4.0
+0.6A.0
+0.6A.10
+0.6A.20
+0.6A.30
+0.6A.40
+ has no avail output, continue next k2 - 0.1A.5:2.0 - 0.2A.0:5.4 - 0.3A.4:0.0
+
+
+	s2: 0.2A.0, getYx(5)=-1 , getXy(5)=-1
+		==> s3f: 0.3A.5.0
+	s3f: 0.3A.5, getYx(0)=-1 , getXy(0)=-1
+
+		==> s5: 0.5A.5.0
+0.6A.0
+0.6A.10
+0.6A.20
+0.6A.30
+0.6A.40
+ has no avail output, continue next k2 - 0.1A.5:2.0 - 0.2A.0:5.5 - 0.3A.5:0.0
+
+
+	s2: 0.2A.0, getYx(5)=-1 , getXy(6)=-1
+		==> s3f: 0.3A.6.0
+	s3f: 0.3A.6, getYx(0)=-1 , getXy(0)=-1
+
+		==> s5: 0.5A.6.0
+0.6A.0
+0.6A.10
+0.6A.20
+0.6A.30
+0.6A.40
+ has no avail output, continue next k2 - 0.1A.5:2.0 - 0.2A.0:5.6 - 0.3A.6:0.0
+
+
+	s2: 0.2A.0, getYx(5)=-1 , getXy(7)=-1
+		==> s3f: 0.3A.7.0
+	s3f: 0.3A.7, getYx(0)=-1 , getXy(0)=-1
+
+		==> s5: 0.5A.7.0
+0.6A.0
+0.6A.10
+0.6A.20
+0.6A.30
+0.6A.40
+ has no avail output, continue next k2 - 0.1A.5:2.0 - 0.2A.0:5.7 - 0.3A.7:0.0
+
+
+	s2: 0.2A.0, getYx(5)=-1 , getXy(8)=-1
+		==> s3f: 0.3A.8.0
+	s3f: 0.3A.8, getYx(0)=-1 , getXy(0)=-1
+
+		==> s5: 0.5A.8.0
+0.6A.0
+0.6A.10
+0.6A.20
+0.6A.30
+0.6A.40
+ has no avail output, continue next k2 - 0.1A.5:2.0 - 0.2A.0:5.8 - 0.3A.8:0.0
+
+
+	s2: 0.2A.0, getYx(5)=-1 , getXy(9)=-1
+		==> s3f: 0.3A.9.0
+	s3f: 0.3A.9, getYx(0)=-1 , getXy(0)=-1
+
+		==> s5: 0.5A.9.0
+0.6A.0
+0.6A.10
+0.6A.20
+0.6A.30
+0.6A.40
+ has no avail output, continue next k2 - 0.1A.5:2.0 - 0.2A.0:5.9 - 0.3A.9:0.0
+
+
+0.2A.0 has no avail output, continue next k1
+	s1: 0.1A.5, getYx(2)=-1 , getXy(1)=-1
+	==> s2: 0.2A.1.5
+	s2: 0.2A.1, getYx(5)=-1 , getXy(0)=-1
+		==> s3f: 0.3A.10.0
+	s3f: 0.3A.10, getYx(0)=-1 , getXy(0)=-1
+
+		==> s5: 0.5A.10.0
+0.6A.1
+0.6A.11
+0.6A.21
+0.6A.31
+0.6A.41
+ has no avail output, continue next k2 - 0.1A.5:2.1 - 0.2A.1:5.0 - 0.3A.10:0.0
+
+
+	s2: 0.2A.1, getYx(5)=-1 , getXy(1)=-1
+		==> s3f: 0.3A.11.0
+	s3f: 0.3A.11, getYx(0)=-1 , getXy(0)=-1
+
+		==> s5: 0.5A.11.0
+0.6A.1
+0.6A.11
+0.6A.21
+0.6A.31
+0.6A.41
+ has no avail output, continue next k2 - 0.1A.5:2.1 - 0.2A.1:5.1 - 0.3A.11:0.0
+
+
+	s2: 0.2A.1, getYx(5)=-1 , getXy(2)=-1
+		==> s3f: 0.3A.12.0
+	s3f: 0.3A.12, getYx(0)=-1 , getXy(0)=-1
+
+		==> s5: 0.5A.12.0
+0.6A.1
+0.6A.11
+0.6A.21
+0.6A.31
+0.6A.41
+ has no avail output, continue next k2 - 0.1A.5:2.1 - 0.2A.1:5.2 - 0.3A.12:0.0
+
+
+	s2: 0.2A.1, getYx(5)=-1 , getXy(3)=-1
+		==> s3f: 0.3A.13.0
+	s3f: 0.3A.13, getYx(0)=-1 , getXy(0)=-1
+
+		==> s5: 0.5A.13.0
+0.6A.1
+0.6A.11
+0.6A.21
+0.6A.31
+0.6A.41
+ has no avail output, continue next k2 - 0.1A.5:2.1 - 0.2A.1:5.3 - 0.3A.13:0.0
+
+
+	s2: 0.2A.1, getYx(5)=-1 , getXy(4)=-1
+		==> s3f: 0.3A.14.0
+	s3f: 0.3A.14, getYx(0)=-1 , getXy(0)=-1
+
+		==> s5: 0.5A.14.0
+0.6A.1
+0.6A.11
+0.6A.21
+0.6A.31
+0.6A.41
+ has no avail output, continue next k2 - 0.1A.5:2.1 - 0.2A.1:5.4 - 0.3A.14:0.0
+
+
+	s2: 0.2A.1, getYx(5)=-1 , getXy(5)=-1
+		==> s3f: 0.3A.15.0
+	s3f: 0.3A.15, getYx(0)=-1 , getXy(0)=-1
+
+		==> s5: 0.5A.15.0
+0.6A.1
+0.6A.11
+0.6A.21
+0.6A.31
+0.6A.41
+ has no avail output, continue next k2 - 0.1A.5:2.1 - 0.2A.1:5.5 - 0.3A.15:0.0
+
+
+	s2: 0.2A.1, getYx(5)=-1 , getXy(6)=-1
+		==> s3f: 0.3A.16.0
+	s3f: 0.3A.16, getYx(0)=-1 , getXy(0)=-1
+
+		==> s5: 0.5A.16.0
+0.6A.1
+0.6A.11
+0.6A.21
+0.6A.31
+0.6A.41
+ has no avail output, continue next k2 - 0.1A.5:2.1 - 0.2A.1:5.6 - 0.3A.16:0.0
+
+
+	s2: 0.2A.1, getYx(5)=-1 , getXy(7)=-1
+		==> s3f: 0.3A.17.0
+	s3f: 0.3A.17, getYx(0)=-1 , getXy(0)=-1
+
+		==> s5: 0.5A.17.0
+0.6A.1
+0.6A.11
+0.6A.21
+0.6A.31
+0.6A.41
+ has no avail output, continue next k2 - 0.1A.5:2.1 - 0.2A.1:5.7 - 0.3A.17:0.0
+
+
+	s2: 0.2A.1, getYx(5)=-1 , getXy(8)=-1
+		==> s3f: 0.3A.18.0
+	s3f: 0.3A.18, getYx(0)=-1 , getXy(0)=-1
+
+		==> s5: 0.5A.18.0
+0.6A.1
+0.6A.11
+0.6A.21
+0.6A.31
+0.6A.41
+ has no avail output, continue next k2 - 0.1A.5:2.1 - 0.2A.1:5.8 - 0.3A.18:0.0
+
+
+	s2: 0.2A.1, getYx(5)=-1 , getXy(9)=-1
+		==> s3f: 0.3A.19.0
+	s3f: 0.3A.19, getYx(0)=-1 , getXy(0)=-1
+
+		==> s5: 0.5A.19.0
+0.6A.1
+0.6A.11
+0.6A.21
+0.6A.31
+0.6A.41
+ has no avail output, continue next k2 - 0.1A.5:2.1 - 0.2A.1:5.9 - 0.3A.19:0.0
+
+
+0.2A.1 has no avail output, continue next k1
+	s1: 0.1A.5, getYx(2)=-1 , getXy(2)=-1
+	==> s2: 0.2A.2.5
+	s2: 0.2A.2, getYx(5)=-1 , getXy(0)=-1
+		==> s3f: 0.3A.20.0
+	s3f: 0.3A.20, getYx(0)=-1 , getXy(0)=-1
+
+		==> s5: 0.5A.20.0
+0.6A.2
+0.6A.12
+	s5->d[1]=0.6A.12.0
+	s5: 0.5A.20, getYx(0)=-1 , getXy(1)=-1
+			==> s6: 0.6A.12.0
+				==> s7: 0.7A.10
+	s6: 0.6A.12, getYx(0)=-1 , getXy(0)=-1
+				==> s7: 0.7A.11
+	s6: 0.6A.12, getYx(0)=-1 , getXy(1)=-1
+	s7: 0.7A.11, getYx(2)=-1 , getXy(4)=-1
+
+found a full PATH, done=true
+
+0.1A.5:2.2 - 0.2A.2:5.0 - 0.3A.20:0.0 - 0.5A.20:0.1 - 0.6A.12:0.1 - 0.7A.11:2.2
+
+
+
+found a full PATH, done=true
+
+found a full PATH, done=true Enter settingRelays 0.1A.51A.5:2.20.2A.22A.2:5.00.3A.203A.20:0.00.5A.205A.20:0.10.6A.126A.12:0.10.7A.117A.11:2.4Enter addPathCmdToTable ,row=0,col=63,row=13,col=18,row=40,col=156,row=40,col=163,row=25,col=84,row=34,col=101$command,action=close,row=0,col=63,row=13,col=18,row=40,col=156,row=40,col=163,row=25,col=84,row=34,col=101,ackid=1-PAC-73*sendCmd here call connecting() 

@@ -1,0 +1,167 @@
+<!--form-->
+<div class="col-md-5">
+  <form id="helpsearch-form">
+    <!---top row-->
+    <div class="row">
+      <div class="col-md-6" style="padding:2px;">
+        <div class="form-group">
+          <label>ITEM</label>
+          <input id="helpsearch-form-item"
+          type="text" class="form-control helpsearch-input">
+        </div>
+      </div>
+      <div class="col-md-2" style="padding:2px;">
+        <button type="button" id="view-helpsearch" class="btn btn-primary" style="margin-top:25px;">
+            View
+        </button>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12" style="padding:2px;">
+        <div class="form-group">
+          <label>DESCRIPTION</label>
+          <textarea id="helpsearch-form-descr" class="form-control helpsearch-input lowercase" rows="5"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-3" style="padding:2px;">
+        <div class="form-group">
+          <label>ACTION</label>
+          <select id="help-form-action" class="form-control">
+            <option value=""></option>
+            <option value="add">ADD</option>
+            <option value="update">UPDATE</option>
+            <option value="delete">DELETE</option>
+          </select>
+        </div>
+      </div>
+      
+      <div class="col-md-6" style="padding:2px;">
+        <button type="button" id="submit-helpsearch" class="btn btn-primary" style="margin-top:25px;"> 
+          Submit
+        </button>
+        <button id="clear-helpsearch" type="button" class="btn btn-primary" style="margin-top:25px;">
+          Clear
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<script type="text/javascript">
+
+  function validateHelpSearch(action) {
+    if (helpSearchTableId === "") {
+      clearErrors();
+      inputError($('#help-form-action'), 'PLEASE SELECT AN ITEM FROM THE LIST OF ITEMS');
+      return;
+    }
+    else {
+      submitHelpSearch(action);
+    }
+  }
+
+  function validateHelpSearchAdd(action) {
+    let item = $('#helpsearch-form-item').val();
+    let descr = $('#helpsearch-form-descr').val();
+
+    if (item == "") {
+      clearErrors();
+      inputError($('#helpsearch-form-item'),'ITEM IS REQUIRED');
+    }
+    else if (descr == "") {
+      clearErrors();
+      inputError($('#helpsearch-form-descr'),'DESCRIPTION IS REQUIRED');
+    }
+    else {
+      submitHelpSearch(action);
+    }
+  }
+
+  function submitHelpSearch(action) {
+      $.ajax({
+        type: "POST",
+        url: ipcDispatch,
+        data: {
+          api: "ipcSearch",
+          act: action,
+          user: user.uname,
+          item: $('#helpsearch-form-item').val().toUpperCase(),
+          descr: $('#helpsearch-form-descr').val()
+        },
+        dataType: 'json'
+      }).done(function(data) {
+        let res = data.rows;
+
+        if (data.rslt === 'fail') {
+          clearErrors();
+          inputError($('#help-form-action'), data.reason);
+          helpSearchTableId = "";
+        }
+        else {
+            queryHelpsearch();
+            inputSuccess($('#help-form-action'), data.reason);
+            helpSearchTableId = "";
+        }
+      });
+    }
+
+  $(document).ready(function() {
+
+    // submit btn click
+    $('#submit-helpsearch').click(function() {
+      let action = $('#help-form-action').val();
+
+      if (action == "") {
+        clearErrors();
+        inputError($('#help-form-action'),'ACTION IS REQUIRED');
+      }
+      else if (action == "add") {
+        validateHelpSearchAdd(action.toUpperCase());
+      }
+      else if (action == "update"){
+        validateHelpSearch(action.toUpperCase());
+      }
+      else if (action == "delete") {
+        validateHelpSearch(action.toUpperCase());
+      }
+    });
+
+    // clear button click
+    $('#clear-helpsearch').click(function() {
+      clearErrors();
+      $('.helpsearch-input').val('');
+      $('#help-form-action').val('');
+      queryHelpsearch();
+      helpSearchTableId = "";
+    });
+
+    $("#helpsearch-table_filter input").addClass('helpsearch-input');
+
+    // listener for text fields
+    $('.helpsearch-input').on('input', function() {
+      clearErrors();
+      $('#help-form-action').val('');
+    })
+
+    // action change listener
+    $('#help-form-action').change(function() {
+      clearErrors();
+    })
+
+    // click event sidebar menu
+    $('.menu-item[page_id="helpsearch-page"]').click(function() {
+      queryHelpsearch();
+      helpSearchTableId = "";
+      clearErrors();
+      $('#help-form-action').val('').change();
+    })
+
+    
+
+  });
+
+</script>
